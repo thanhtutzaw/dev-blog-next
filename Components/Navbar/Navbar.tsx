@@ -15,7 +15,7 @@ export default function Navbar({ User, setUser }: any) {
   //   typeof window !== 'undefined' && JSON.parse(localStorage.getItem("user")!)
 
   // );
-
+const [Local, setLocal] = useState(false)
   const [Data, setData] = useState({});
   const [SettingEl, setSettingEl] = useState<null | HTMLElement>(null)
   const open = Boolean(SettingEl)
@@ -65,6 +65,15 @@ export default function Navbar({ User, setUser }: any) {
     // setUser(localUserData && JSON.parse());
   };
   useEffect(() => {
+    
+      setLocal(true)
+      console.log("Local",Local);
+
+      if(localStorage.getItem('user')){
+        setLocal(true)
+      }
+    
+
     if (localStorage.getItem('user') === null) {
       setUser(null);
       console.log(" local === null set user null");
@@ -86,17 +95,21 @@ export default function Navbar({ User, setUser }: any) {
     }
   }, [Data]);
 
+if(!Local){
+  return null;
+}
 
-  // if(!User) return <p>Loading</p>;
-  // console.log("Userprops", User)
-  if(!User){
-    console.log(`user {${User}} before UI`)
-  }else{
-    console.log(`user ${User.name}`);
-  }
+
+  // if(!User){
+  //   console.log(`user {${User}} before UI`)
+  // }else{
+  //   console.log(`user ${User.name}`);
+  // }
   return (
     <AppBar>
       <Container maxWidth="lg" sx={{ px: 3 }}>
+        {/* {Local === false && (<div>aaaaaaaaaaaaaaa</div>)} */}
+        {/* {Local && (<div>{typeof User}</div>)} */}
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }} alignItems='center' justifyContent='center'>
             <Typography
