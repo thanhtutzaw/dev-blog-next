@@ -8,14 +8,7 @@ declare const google: any
 
 export default function Navbar({ User, setUser }: any) {
 
-  let localUserData: any
-
-
-  // const [User, setUser] = useState<any>(
-  //   typeof window !== 'undefined' && JSON.parse(localStorage.getItem("user")!)
-
-  // );
-const [Local, setLocal] = useState(false)
+  const [Local, setLocal] = useState(false)
   const [Data, setData] = useState({});
   const [SettingEl, setSettingEl] = useState<null | HTMLElement>(null)
   const open = Boolean(SettingEl)
@@ -62,25 +55,22 @@ const [Local, setLocal] = useState(false)
     localStorage.setItem("user", JSON.stringify(userObject));
     console.log("add local from signin handle");
     setUser(JSON.parse(localStorage.getItem('user')!))
-    // setUser(localUserData && JSON.parse());
   };
   useEffect(() => {
-    
-      setLocal(true)
-      console.log("Local",Local);
 
-      if(localStorage.getItem('user')){
-        setLocal(true)
-      }
-    
+    setLocal(true)
+    console.log("Local", Local);
+
+    if (localStorage.getItem('user')) {
+      setLocal(true)
+    }
+
 
     if (localStorage.getItem('user') === null) {
       setUser(null);
       console.log(" local === null set user null");
     }
-    else {
-      // setUser(JSON.parse(localStorage.getItem("user")!))
-    }
+
     if (!Data) {
       console.log("no Data");
       localStorage.removeItem("user");
@@ -95,21 +85,12 @@ const [Local, setLocal] = useState(false)
     }
   }, [Data]);
 
-if(!Local){
-  return null;
-}
-
-
-  // if(!User){
-  //   console.log(`user {${User}} before UI`)
-  // }else{
-  //   console.log(`user ${User.name}`);
-  // }
+  if (!Local) {
+    return null;
+  }
   return (
     <AppBar>
       <Container maxWidth="lg" sx={{ px: 3 }}>
-        {/* {Local === false && (<div>aaaaaaaaaaaaaaa</div>)} */}
-        {/* {Local && (<div>{typeof User}</div>)} */}
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }} alignItems='center' justifyContent='center'>
             <Typography
@@ -189,15 +170,6 @@ if(!Local){
                     </MenuItem>
                   </Menu>
                 </Collapse></>)}
-              {/* {User ? (
-                <>
-
-                </>
-              ) : (
-                <>
-
-                </>
-              )} */}
             </Box>
           </Box>
         </Toolbar>
