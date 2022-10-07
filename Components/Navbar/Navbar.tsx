@@ -6,7 +6,12 @@ import { useEffect, useState } from "react";
 
 declare const google: any
 
-export default function Navbar({ User, setUser }: any) {
+export default function Navbar() {
+  interface IUser {
+    name: string;
+    picture: string;
+  }
+const [User, setUser] = useState<IUser | null>(null);
 
   const [Local, setLocal] = useState(false)
   const [Data, setData] = useState({});
@@ -52,24 +57,24 @@ export default function Navbar({ User, setUser }: any) {
       console.log("add Data from signin handle");
       console.log(userObject)
     }
-    localStorage.setItem("user", JSON.stringify(userObject));
-    console.log("add local from signin handle");
-    setUser(JSON.parse(localStorage.getItem('user')!))
+    // localStorage.setItem("user", JSON.stringify(userObject));
+    // console.log("add local from signin handle");
+    setUser(userObject)
   };
   useEffect(() => {
-
     setLocal(true)
-    console.log("Local", Local);
+    // setLocal(true)
+    // console.log("Local", Local);
 
-    if (localStorage.getItem('user')) {
-      setLocal(true)
-    }
+    // if (localStorage.getItem('user')) {
+    //   setLocal(true)
+    // }
 
 
-    if (localStorage.getItem('user') === null) {
-      setUser(null);
-      console.log(" local === null set user null");
-    }
+    // if (localStorage.getItem('user') === null) {
+    //   setUser(null);
+    //   console.log(" local === null set user null");
+    // }
 
     if (!Data) {
       console.log("no Data");
@@ -175,6 +180,5 @@ export default function Navbar({ User, setUser }: any) {
         </Toolbar>
       </Container>
     </AppBar >
-
   )
 }
